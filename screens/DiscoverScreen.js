@@ -22,7 +22,8 @@ export default function DiscoverScreen() {
         description: "Fresh tomatoes",
         distance: "0.98km",
         old_price: "40",
-        new_price: "20"
+        new_price: "20",
+        shop: "Old Joe's"
       },
       {
         uri:
@@ -31,7 +32,8 @@ export default function DiscoverScreen() {
         description: "Fresh bananas",
         distance: "2.3km",
         old_price: "60",
-        new_price: "10"
+        new_price: "10",
+        shop: "Hanna's fruit shop"
       },
       {
         uri:
@@ -40,7 +42,8 @@ export default function DiscoverScreen() {
         description: "Fresh kale",
         distance: "0.08km",
         old_price: "50",
-        new_price: "20"
+        new_price: "20",
+        shop: "Carrefour"
       },
       {
         uri:
@@ -49,7 +52,8 @@ export default function DiscoverScreen() {
         description: "Soy milk",
         distance: "1.8km",
         old_price: "23",
-        new_price: "20"
+        new_price: "20",
+        shop: "Colruyt"
       }
     ]
   };
@@ -70,6 +74,7 @@ export default function DiscoverScreen() {
               </Left>
               <Body>
                 <Text>{discount.title}</Text>
+                <Text>{discount.shop}</Text>
                 <Text note>{discount.description}</Text>
               </Body>
               <Right>
