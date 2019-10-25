@@ -1,20 +1,34 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import * as Permissions from 'expo-permissions';
-import { Camera } from 'expo-camera';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default class GreenCamera extends React.Component {
-  state = {
-    hasCameraPermission: null,
-    type: Camera.Constants.Type.back,
-  };
+  
 
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasCameraPermission: null,
+      type: BarCodeScanner.Constants.Type.back,
+      scanned: false,
+    };
+  }
 
+  handleScan(data) {
+    if (!this.state.scanned) {
+      this.props.scanCallback(data);
+      this.setState({scanned: true});
+      setTimeout(() => {
+        this.setState({scanned: false});
+      }, 2000);
+    }
+  }
 
   render() {
     const { hasCameraPermission } = this.state;
@@ -25,7 +39,7 @@ export default class GreenCamera extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={this.state.type}>
+          <BarCodeScanner style={{ flex: 1 }} type={this.state.type} onBarCodeScanned={ this.handleScan.bind(this) }>
             <View
               style={{
                 flex: 1,
@@ -33,7 +47,7 @@ export default class GreenCamera extends React.Component {
                 flexDirection: 'row',
               }}>
             </View>
-          </Camera>
+          </BarCodeScanner>
         </View>
       );
     }
