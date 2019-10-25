@@ -13,7 +13,8 @@ export default class App extends React.Component {
         },
         description: "Fresh vegetables and fruits",
         title: "Joe's shop",
-        color: "yellow"
+        color: "yellow",
+        score: "50"
       },
       {
         latlng: {
@@ -22,7 +23,8 @@ export default class App extends React.Component {
         },
         description: "All kind of bio products",
         title: "Bio greens",
-        color:"green"
+        color: "green",
+        score: "89"
       },
       {
         latlng: {
@@ -31,7 +33,8 @@ export default class App extends React.Component {
         },
         description: "Multinational supermarket",
         title: "Carrefour",
-        color:"red"
+        color: "red",
+        score: "30"
       }
     ]
   };
@@ -52,7 +55,7 @@ export default class App extends React.Component {
             <Marker
               key={i}
               coordinate={marker.latlng}
-              title={marker.title}
+              title={`${marker.title} ${marker.score}%`}
               description={marker.description}
               pinColor={marker.color}
             />
