@@ -1,7 +1,7 @@
 import React from "react";
 import { Dimensions, View } from "react-native";
 import { LineChart, PieChart } from "react-native-chart-kit";
-import { Text, Container } from "native-base";
+import { Text, Body, Container } from "native-base";
 export default function DashboardScreen() {
   state = {};
 
@@ -63,7 +63,9 @@ export default function DashboardScreen() {
   return (
     <Container>
       <View>
-        <Text>Bezier Line Chart</Text>
+        <Body>
+          <Text>Bezier Line Chart</Text>
+        </Body>
         <LineChart
           data={{
             labels: ["January", "February", "March", "April", "May", "June"],
@@ -86,13 +88,15 @@ export default function DashboardScreen() {
           chartConfig={chartConfig}
           bezier
           style={{
-            marginVertical: 8,
+            marginVertical: 24,
             borderRadius: 16
           }}
         />
       </View>
       <View>
-        <Text>Pie Chart</Text>
+        <Body>
+          <Text>Pie Chart</Text>
+        </Body>
         <PieChart
           data={data}
           width={Dimensions.get("window").width}
