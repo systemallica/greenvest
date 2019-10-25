@@ -1,67 +1,45 @@
 import React from 'react';
 import {
-  Platform,
   StyleSheet,
-  Text,
   View,
-  Dimensions,
-  TouchableOpacity,
 } from 'react-native';
 
-import { Ionicons } from '@expo/vector-icons';
-
+import ScanDetails from '../components/ScanDetails';
 import GreenCamera from '../components/GreenCamera';
 
-export default function ScanScreen() {
-  return (
-    <View style={styles.upperContainer}>
-        <GreenCamera scanCallback={onScanned} />
-    </View>
-  );
+export default class ScanScreen extends React.Component {
+
+    state = {
+        scanned: false,
+        scanType: undefined,
+        scanData: undefined,
+    }
+
+    onScanned({type, data}) {
+        this.setState({scanType: type, scanData: data, scanned: true});
+    }
+
+    render() {
+        if (!this.state.scanned) {
+            return (
+                <View style={styles.upperContainer}>
+                    <GreenCamera scanCallback={ this.onScanned.bind(this) } />
+                </View>
+            );
+        } else {
+            return (
+                <ScanDetails scanProps={{
+                    type: this.state.scanType,
+                    data: this.state.scanData,
+                }} />
+            )
+        }
+    }
 }
 
 ScanScreen.navigationOptions = {
   header: null,
 };
-
-function onScanned({type, data}) {
-    alert(`scan, parent! Type: ${type}. Data: ${data}`);
-}
-
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
 
 const styles = StyleSheet.create({
   upperContainer: {

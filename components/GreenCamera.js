@@ -24,9 +24,6 @@ export default class GreenCamera extends React.Component {
     if (!this.state.scanned) {
       this.props.scanCallback(data);
       this.setState({scanned: true});
-      setTimeout(() => {
-        this.setState({scanned: false});
-      }, 2000);
     }
   }
 
