@@ -6,6 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import ScanScreen from '../screens/ScanScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -67,10 +68,27 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+const ScanStack = createStackNavigator(
+  {
+    Scan: ScanScreen,
+  },
+  config
+);
+
+ScanStack.navigationOptions = {
+  tabBarLabel: 'Scan',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-barcode' : 'md-barcode'} />
+  ),
+};
+
+ScanStack.path = '';
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack,
+  ScanStack,
 });
 
 tabNavigator.path = '';
