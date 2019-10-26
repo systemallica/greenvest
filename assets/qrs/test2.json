@@ -1,6 +1,6 @@
 {
-    "date": "YYYY-MM-DD",
-    "total": 2.56,
+    "date": "2019-10-26",
+    "total": 54.26,
     "items": [
         {
             "category": "fruits",
@@ -19,6 +19,54 @@
             "weight": 1.04,
             "country": "ES",
             "packaging": "cardboard"
+        },
+        {
+            "category": "pork",
+            "weight": 0.250,
+            "country": "FR",
+            "packaging": "plastic"
+        },
+        {
+            "category": "chicken",
+            "weight": 0.541,
+            "country": "BE",
+            "packaging": "plastic"
+        },
+        {
+            "category": "tuna",
+            "weight": 0.450,
+            "country": "BE",
+            "packaging": "aluminium"
+        },
+        {
+            "category": "potatoes",
+            "weight": 1.250,
+            "country": "BE",
+            "packaging": "cardboard"
+        },
+        {
+            "category": "milk",
+            "weight": 6,
+            "country": "BE",
+            "packaging": "glass"
+        },
+        {
+            "category": "fruits",
+            "weight": 0.421,
+            "country": "ES",
+            "packaging": "wood"
+        },
+        {
+            "category": "beans",
+            "weight": 0.476,
+            "country": "NO",
+            "packaging": "plastic"
+        },
+        {
+            "category": "lamb",
+            "weight": 1.542,
+            "country": "BE",
+            "packaging": "plastic"
         }
     ]
 }

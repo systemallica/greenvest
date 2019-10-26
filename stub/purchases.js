@@ -27,19 +27,19 @@ export default purchases = [
     telenetScore: 4,
     categories: {
       green: 1,
-      yellow: 12,
-      red: 4
+      yellow: 9,
+      red: 11
     },
     date: "2019/07/01"
   },
   {
-    greenScore: 44,
+    greenScore: 65,
     amount: 76.34,
     telenetScore: 4.4,
     categories: {
       green: 3,
       yellow: 0,
-      red: 1
+      red: 6
     },
     date: "2019/08/15"
   },
@@ -55,12 +55,12 @@ export default purchases = [
     date: "2019/09/10"
   },
   {
-    greenScore: 70,
+    greenScore: 85,
     amount: 50.16,
     telenetScore: 7,
     categories: {
       green: 10,
-      yellow: 2,
+      yellow: 3,
       red: 10
     },
     date: "2019/10/10"

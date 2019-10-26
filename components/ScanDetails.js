@@ -203,7 +203,7 @@ export default class ScanDetails extends React.Component {
                                     large
                                     source={require("../assets/images/eco-points.png")}
                                 />
-                                <Text style={{ marginTop: 5 }}>{this.state.details.telenetScore}</Text>
+                                <Text style={{ marginTop: 5 }}>{this.state.details.telenetScore} ecoins</Text>
                             </View>
                         </CardItem>
                         <CardItem style={{display: 'flex', justifyContent: 'center'}}>

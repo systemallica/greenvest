@@ -105,7 +105,7 @@ export default function DashboardScreen() {
                 source={require("../assets/images/eco-points.png")}
               />
               <Text style={{ marginTop: 5 }}>
-                {aggregatedPurchase.telenetScore}
+                {aggregatedPurchase.telenetScore} ecoins
               </Text>
             </View>
           </CardItem>
