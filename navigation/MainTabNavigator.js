@@ -1,96 +1,111 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from "react";
+import { Platform } from "react-native";
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
-import ScanScreen from '../screens/ScanScreen';
+import TabBarIcon from "../components/TabBarIcon";
+import MapScreen from "../screens/MapScreen";
+import DiscoverScreen from "../screens/DiscoverScreen";
+import ScanScreen from "../screens/ScanScreen";
+import DashboardScreen from "../screens/DashboardScreen";
 
 const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
+  web: { headerMode: "screen" },
+  default: {}
 });
 
-const HomeStack = createStackNavigator(
+const MapStack = createStackNavigator(
   {
-    Home: HomeScreen,
+    Map: MapScreen
   },
   config
 );
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+MapStack.navigationOptions = {
+  tabBarLabel: "Map",
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
-        Platform.OS === 'ios'
-          ? `ios-map${focused ? '' : '-outline'}`
-          : 'md-map'
+        Platform.OS === "ios" ? `ios-map${focused ? "" : "-outline"}` : "md-map"
       }
     />
-  ),
+  )
 };
 
-HomeStack.path = '';
+MapStack.path = "";
 
-const LinksStack = createStackNavigator(
+const DiscoverStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Discover: DiscoverScreen
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+DiscoverStack.navigationOptions = {
+  tabBarLabel: "Discover",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-compass" : "md-compass"}
+    />
+  )
 };
 
-LinksStack.path = '';
-
-const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
-);
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
-
-SettingsStack.path = '';
+DiscoverStack.path = "";
 
 const ScanStack = createStackNavigator(
   {
-    Scan: ScanScreen,
+    Scan: ScanScreen
   },
   config
 );
 
 ScanStack.navigationOptions = {
-  tabBarLabel: 'Scan',
+  tabBarLabel: "Scan",
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-barcode' : 'md-barcode'} />
-  ),
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-barcode" : "md-barcode"}
+    />
+  )
 };
 
-ScanStack.path = '';
+ScanStack.path = "";
 
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-  ScanStack,
-});
+const DashboardStack = createStackNavigator(
+  {
+    Dashboard: DashboardScreen
+  },
+  config
+);
 
-tabNavigator.path = '';
+DashboardStack.navigationOptions = {
+  tabBarLabel: "Dashboard",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === "ios" ? "ios-trending-up" : "md-trending-up"}
+    />
+  )
+};
+
+DashboardStack.path = "";
+
+const tabNavigator = createBottomTabNavigator(
+  {
+    MapStack,
+    DiscoverStack,
+    ScanStack,
+    DashboardStack
+  },
+  {
+    initialRouteName: "DiscoverStack"
+  }
+);
+
+tabNavigator.path = "";
 
 export default tabNavigator;
