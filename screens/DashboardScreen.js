@@ -43,23 +43,23 @@ export default function DashboardScreen() {
 
   const purchaseCategoriesParsedForPiechart = [
     {
-      name: "Green",
+      name: "< 2kg",
       value: aggregatedPurchase.categories.green,
       color: "green",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     },
     {
-      name: "Red",
-      value: aggregatedPurchase.categories.red,
-      color: "red",
+      name: " 2kg - 7kg",
+      value: aggregatedPurchase.categories.yellow,
+      color: "yellow",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     },
     {
-      name: "Yellow",
-      value: aggregatedPurchase.categories.yellow,
-      color: "yellow",
+      name: "> 7kg",
+      value: aggregatedPurchase.categories.red,
+      color: "red",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     }
