@@ -1,59 +1,63 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-} from 'react-native';
+import React from "react";
+import { StyleSheet, View } from "react-native";
 
-import ScanDetails from '../components/ScanDetails';
-import GreenCamera from '../components/GreenCamera';
+import ScanDetails from "../components/ScanDetails";
+import GreenCamera from "../components/GreenCamera";
 
 export default class ScanScreen extends React.Component {
+  state = {
+    scanned: false,
+    scanType: undefined,
+    scanData: undefined
+  };
 
-    state = {
-        scanned: false,
-        scanType: undefined,
-        scanData: undefined,
-    }
+  onScanned({ type, data }) {
+    this.setState({ scanType: type, scanData: data, scanned: true });
+  }
 
-    onScanned({type, data}) {
-        this.setState({scanType: type, scanData: data, scanned: true});
-    }
+  onClosed(details) {
+    this.setState({ scanned: false });
+    console.log("Navigating");
+    console.log(details);
+    this.props.navigation.navigate({
+      routeName: "DashboardStack",
+      params: {
+        purchaseDetails: details
+      }
+    });
+  }
 
-    onClosed() {
-        this.setState({ scanned: false });
+  render() {
+    if (!this.state.scanned) {
+      return (
+        <View style={styles.upperContainer}>
+          <GreenCamera scanCallback={this.onScanned.bind(this)} />
+        </View>
+      );
+    } else {
+      return (
+        <ScanDetails
+          scanProps={{
+            type: this.state.scanType,
+            data: this.state.scanData
+          }}
+          closeCallback={this.onClosed.bind(this)}
+        />
+      );
     }
-
-    render() {
-        if (!this.state.scanned) {
-            return (
-                <View style={styles.upperContainer}>
-                    <GreenCamera scanCallback={ this.onScanned.bind(this) } />
-                </View>
-            );
-        } else {
-            return (
-                <ScanDetails
-                    scanProps={{
-                        type: this.state.scanType,
-                        data: this.state.scanData,
-                    }}
-                    closeCallback={ this.onClosed.bind(this) }
-                />
-            )
-        }
-    }
+  }
 }
 
 ScanScreen.navigationOptions = {
-    title: 'Scan a code',
+  title: "Scan a code"
 };
 
 const styles = StyleSheet.create({
   upperContainer: {
-    backgroundColor: '#fff',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    flexGrow: 1,
-  },
+    backgroundColor: "#fff",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-end",
+    flexGrow: 1
+  }
 });
