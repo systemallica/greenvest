@@ -103,6 +103,9 @@ export default function DashboardScreen() {
         </Card>
 
         <Card>
+          <Body>
+            <Text>GreenScore over time</Text>
+          </Body>
           <LineChart
             data={{
               labels: purchaseDates,
@@ -119,6 +122,9 @@ export default function DashboardScreen() {
         </Card>
 
         <Card>
+          <Body>
+            <Text>Purchases by category</Text>
+          </Body>
           <PieChart
             data={purchaseCategoriesParsedForPiechart}
             width={Dimensions.get("window").width}
