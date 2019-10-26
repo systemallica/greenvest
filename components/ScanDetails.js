@@ -1,5 +1,5 @@
 import React from 'react';
-import translator from "../stub/translator"
+import translator from "../stub/translator";
 import {
     View,
     Text,
@@ -39,7 +39,8 @@ export default class ScanDetails extends React.Component {
         if (purchase !== undefined) {
             
             score = {};
-            purchase_weight = purchase.items.reduce((accumulator, currentValue) => accumulator + currentValue.weight);
+            console.log(purchase);
+            purchase_weight = purchase.items.length;
             console.log("purchase weight ",purchase_weight);
             // Products from abroad are supposed to have gone from Panama to Belgium (8808 km) which translates to 0.89 Kg of carbon footprint per product. 
             footprint_normalizer = Math.max.apply(Math, translator.category_translation.map(function(o) { return o.weight; }));
@@ -50,14 +51,15 @@ export default class ScanDetails extends React.Component {
             scores =[];
             total_score = 0;
 
-
             purchase.items.forEach(item => {
-                prod_type = translator.category_translation.findIndex( categ => categ.category == item["category"] );
-                prod_fp_w = translator[prod_type].weight;
-                country = translator.country_translation.findIndex( categ => categ.category == item["country"] );
-                ct_fp_w = translator[prod_type].weight;
-                pkg = translator.packaging_translation.findIndex( categ => categ.category == item["packaging"] );
-                pkg_fp_w = translator[prod_type].weight;
+                prod_fp_w = translator.category_translation.find(categ => categ.category == item["category"] ).weight;
+                ct_fp_w = translator.country_translation.find(categ => categ.category == item["country"]);
+                if (ct_fp_w !== undefined) {
+                    ct_fp_w = ct_fp_w.weight;
+                } else {
+                    ct_fp_w = 0.89;
+                }
+                pkg_fp_w = translator.packaging_translation.find(categ => categ.category == item["packaging"]).weight;
                 item_score = (prod_fp_w + ct_fp_w + pkg_fp_w*0.05 )/(footprint_normalizer);
                 console.log("item score ",item_score);
                 total_score += item.weight*(prod_fp_w + ct_fp_w + pkg_fp_w*0.05 )/(purchase_weight*footprint_normalizer);
@@ -70,8 +72,6 @@ export default class ScanDetails extends React.Component {
                 );                
             });
 
-            // Telenet score is the ecopoints multiplied by the amount of money you have spent
-            telenet_points = total_score*purchase.total;
             //If carbon footprint is less than 2kg is considered a green product
 
             let green_amount = 0;
@@ -88,10 +88,14 @@ export default class ScanDetails extends React.Component {
                 }
             });
 
+            const greenScore = (1 - total_score);
+            // Telenet score is the ecopoints multiplied by the amount of money you have spent
+            const telenetScore = purchase.total * greenScore;
+
             details = {
-                greenScore: total_score,
-                amount: purchase.total,
-                telenetScore: telenet_points,
+                greenScore: (greenScore * 100).toFixed(2),
+                amount: purchase.total.toFixed(2),
+                telenetScore: telenetScore.toFixed(2),
                 categories: {
                     green: green_amount,
                     yellow: yellow_amount,
@@ -183,11 +187,11 @@ export default class ScanDetails extends React.Component {
                         <CardItem style={this.styles.cardItem}>
                             <View style={this.styles.cardItemBadge}>
                                 <Thumbnail large square source={require("../assets/images/icon.png")} />
-                                <Text style={{ marginTop: 5 }}>{this.state.details.greenScore}</Text>
+                                <Text style={{ marginTop: 5 }}>{this.state.details.greenScore}%</Text>
                             </View>
                             <View style={this.styles.cardItemBadge}>
                                 <Thumbnail large square source={require("../assets/images/euro.png")} />
-                                <Text style={{ marginTop: 5 }}>{this.state.details.amount}</Text>
+                                <Text style={{ marginTop: 5 }}>{this.state.details.amount}€</Text>
                             </View>
                             <View style={this.styles.cardItemBadge}>
                                 <Thumbnail

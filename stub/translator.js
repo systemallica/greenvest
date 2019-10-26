@@ -57,7 +57,7 @@ export default translator = {
             weight: 1.9
         },
         {
-            category: "fruit",
+            category: "fruits",
             weight: 1.1
         },        {
             category: "lentils",
