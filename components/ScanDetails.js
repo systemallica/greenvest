@@ -46,22 +46,38 @@ export default class ScanDetails extends React.Component {
                     yellow: 2,
                     red: 10,
                 }
-            }
+            };
         }
 
-        const barChartData = {
-            labels: ['Green', 'Yellow', 'Red'],
-            datasets: [
-                {
-                    data: [...Object.values(details.categories)],
-                },
-            ],
-        };
+        const pieChartData = [
+            {
+                name: "< 2kg",
+                amount: details.categories.green,
+                color: '#00FF00',
+                legendFontColor: "#000000",
+                legendFontSize: 15
+            },
+            {
+                name: "2 - 7 kg",
+                amount: details.categories.yellow,
+                color: '#FFFF00',
+                legendFontColor: "#000000",
+                legendFontSize: 15
+            },
+            {
+                name: "> 7kg",
+                amount: details.categories.red,
+                color: '#FF0000',
+                legendFontColor: "#000000",
+                legendFontSize: 15
+            },
+
+        ];
 
         const chartConfig = {
-            backgroundGradientFrom: '#1E2923',
+            backgroundGradientFrom: 'transparent',
             backgroundGradientFromOpacity: 0,
-            backgroundGradientTo: '#08130D',
+            backgroundGradientTo: 'transparent',
             backgroundGradientToOpacity: 0.5,
             color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
             strokeWidth: 2, // optional, default 3
@@ -72,7 +88,7 @@ export default class ScanDetails extends React.Component {
             purchase,
             details,
             chartConfig,
-            barChartData,
+            pieChartData,
         };
     }
 
@@ -101,13 +117,13 @@ export default class ScanDetails extends React.Component {
                         </CardItem>
                     </Card>
                     <Card>
-                        <CardItem>
-                            <BarChart
-                                style={{}}
-                                data={this.state.barChartData}
+                        <CardItem style={{display: 'flex', justifyContent: 'center'}}>
+                            <PieChart
+                                data={this.state.pieChartData}
                                 width={Dimensions.get("window").width}
                                 height={220}
-                                withHorizontalLabels={false}
+                                accessor="amount"
+                                backgroundColor="transparent"
                                 chartConfig={this.state.chartConfig}
                             />
                         </CardItem>    
