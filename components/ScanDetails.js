@@ -7,29 +7,30 @@ export default class ScanDetails extends React.Component {
 
     constructor(props) {
         super(props);
-        const purchase = this.parsePurchase(props.scanProps.data);
-        const details = this.getDetails(purchase);
+
+        let purchase;
+        let details;
+
+        const jsonString = props.scanProps.data;
+        if (jsonString !== undefined) {
+            try {
+                purchase = JSON.parse(jsonString);
+            } catch (err) {
+                purchase = undefined;
+            }
+        }
+
+        if (purchase !== undefined) {
+            // calculate score
+            details = {
+                // ...
+            }
+        }
+
         this.state = {
             purchase,
             details,
         };
-    }
-
-    parsePurchase(jsonString) {
-        if (jsonString !== undefined) {
-            try {
-                const details = JSON.parse(jsonString);
-                return details;
-            } catch (err) {
-                return {};
-            }
-        } else {
-            return {};
-        }
-    }
-
-    parseDetails(purchase) {
-        return undefined;
     }
 
 
@@ -37,7 +38,7 @@ export default class ScanDetails extends React.Component {
         return (
             <View style={this.styles.container}>
                 <Text>
-                    { this.state.data }
+                    { 'todo' }
                 </Text>
             </View>
         );
