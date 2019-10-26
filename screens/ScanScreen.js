@@ -19,8 +19,12 @@ export default class ScanScreen extends React.Component {
         this.setState({scanType: type, scanData: data, scanned: true});
     }
 
+    onClosed() {
+        this.setState({ scanned: false });
+    }
+
     render() {
-        if (this.state.scanned) {
+        if (!this.state.scanned) {
             return (
                 <View style={styles.upperContainer}>
                     <GreenCamera scanCallback={ this.onScanned.bind(this) } />
@@ -28,17 +32,20 @@ export default class ScanScreen extends React.Component {
             );
         } else {
             return (
-                <ScanDetails scanProps={{
-                    type: this.state.scanType,
-                    data: this.state.scanData,
-                }} />
+                <ScanDetails
+                    scanProps={{
+                        type: this.state.scanType,
+                        data: this.state.scanData,
+                    }}
+                    closeCallback={ this.onClosed.bind(this) }
+                />
             )
         }
     }
 }
 
 ScanScreen.navigationOptions = {
-  header: null,
+    title: 'Scan a code',
 };
 
 const styles = StyleSheet.create({
