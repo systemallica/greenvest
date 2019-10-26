@@ -23,7 +23,14 @@ export default class ScanDetails extends React.Component {
         if (purchase !== undefined) {
             // calculate score
             details = {
-                // ...
+                greenScore: 70,
+                amount: 50.16,
+                telenetScore: 7,
+                categories: {
+                    green: 10,
+                    yellow: 2,
+                    red: 10,
+                }
             }
         }
 
@@ -38,7 +45,7 @@ export default class ScanDetails extends React.Component {
         return (
             <View style={this.styles.container}>
                 <Text>
-                    { 'todo' }
+                    { String(this.state.details) }
                 </Text>
             </View>
         );
