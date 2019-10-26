@@ -12,6 +12,7 @@ import {
   Left,
   Thumbnail
 } from "native-base";
+import moment from "moment";
 
 import purchases from "../stub/purchases";
 
@@ -64,6 +65,20 @@ export default function DashboardScreen() {
     }
   ];
 
+  let purchaseGreenScores = [];
+  let purchaseDates = [];
+
+  for (purchase of purchases) {
+    purchaseGreenScores.push(purchase.greenScore);
+    purchaseDates.push(moment(purchase.date).format("DD/MM"));
+  }
+
+  // Only take last four elements
+  purchaseGreenScores = purchaseGreenScores.slice(
+    purchaseGreenScores.length - 4
+  );
+  purchaseDates = purchaseDates.slice(purchaseDates.length - 4);
+
   return (
     <Container>
       <Content>
@@ -90,23 +105,15 @@ export default function DashboardScreen() {
         <Card>
           <LineChart
             data={{
-              labels: ["January", "February", "March", "April", "May", "June"],
+              labels: purchaseDates,
               datasets: [
                 {
-                  data: [
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100,
-                    Math.random() * 100
-                  ]
+                  data: purchaseGreenScores
                 }
               ]
             }}
             width={Dimensions.get("window").width}
             height={220}
-            yAxisLabel={"$"}
             chartConfig={chartConfig}
             bezier
           />
