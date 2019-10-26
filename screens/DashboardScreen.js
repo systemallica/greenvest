@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { LineChart, PieChart } from "react-native-chart-kit";
 import {
   Container,
@@ -43,23 +43,23 @@ export default function DashboardScreen() {
 
   const purchaseCategoriesParsedForPiechart = [
     {
-      name: "Green",
+      name: "< 2kg",
       value: aggregatedPurchase.categories.green,
       color: "green",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     },
     {
-      name: "Red",
-      value: aggregatedPurchase.categories.red,
-      color: "red",
+      name: " 2kg - 7kg",
+      value: aggregatedPurchase.categories.yellow,
+      color: "yellow",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     },
     {
-      name: "Yellow",
-      value: aggregatedPurchase.categories.yellow,
-      color: "yellow",
+      name: "> 7kg",
+      value: aggregatedPurchase.categories.red,
+      color: "red",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     }
@@ -83,22 +83,26 @@ export default function DashboardScreen() {
     <Container>
       <Content>
         <Card>
-          <CardItem>
-            <Left>
+          <CardItem style={this.styles.cardItem}>
+            <View style={this.styles.cardItemBadge}>
               <Thumbnail square source={require("../assets/images/icon.png")} />
-              <Text>{aggregatedPurchase.greenScore}</Text>
-            </Left>
-            <Body>
+              <Text style={{ marginTop: 5 }}>
+                {aggregatedPurchase.greenScore}
+              </Text>
+            </View>
+            <View style={this.styles.cardItemBadge}>
               <Thumbnail square source={require("../assets/images/euro.png")} />
-              <Text>{aggregatedPurchase.amount}</Text>
-            </Body>
-            <Right>
+              <Text style={{ marginTop: 5 }}>{aggregatedPurchase.amount}</Text>
+            </View>
+            <View style={this.styles.cardItemBadge}>
               <Thumbnail
                 square
                 source={require("../assets/images/telenet.png")}
               />
-              <Text>{aggregatedPurchase.telenetScore}</Text>
-            </Right>
+              <Text style={{ marginTop: 5 }}>
+                {aggregatedPurchase.telenetScore}
+              </Text>
+            </View>
           </CardItem>
         </Card>
 
@@ -143,3 +147,17 @@ export default function DashboardScreen() {
 DashboardScreen.navigationOptions = {
   title: "Dashboard"
 };
+
+styles = StyleSheet.create({
+  cardItem: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  cardItemBadge: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  }
+});
