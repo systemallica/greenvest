@@ -51,21 +51,21 @@ export default class ScanDetails extends React.Component {
 
         const pieChartData = [
             {
-                name: "< 2kg",
+                name: "  < 2kg",
                 amount: details.categories.green,
                 color: '#00FF00',
                 legendFontColor: "#000000",
                 legendFontSize: 15
             },
             {
-                name: "2 - 7 kg",
+                name: "  2 - 7 kg",
                 amount: details.categories.yellow,
                 color: '#FFFF00',
                 legendFontColor: "#000000",
                 legendFontSize: 15
             },
             {
-                name: "> 7kg",
+                name: "  > 7kg",
                 amount: details.categories.red,
                 color: '#FF0000',
                 legendFontColor: "#000000",
