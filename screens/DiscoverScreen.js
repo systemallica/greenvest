@@ -38,11 +38,11 @@ export default function DiscoverScreen() {
               <Right>
                 <View style={{ display: "flex", flexDirection: "row" }}>
                   <Text
-                    style={{ color: "red", textDecorationLine: "line-through" }}
+                    style={{ color: "#BB4430", textDecorationLine: "line-through" }}
                   >{`${discount.old_price}€ `}</Text>
                   <Text> -> </Text>
                   <Text
-                    style={{ color: "green" }}
+                    style={{ color: "#44AA00" }}
                   >{`${discount.new_price}€`}</Text>
                 </View>
                 <Text>{discount.distance} away</Text>

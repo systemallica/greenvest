@@ -7,6 +7,8 @@ import {
 import ScanDetails from '../components/ScanDetails';
 import GreenCamera from '../components/GreenCamera';
 
+import { NavigationEvents } from 'react-navigation';
+
 export default class ScanScreen extends React.Component {
 
     state = {
@@ -23,7 +25,16 @@ export default class ScanScreen extends React.Component {
         this.setState({ scanned: false });
     }
 
+    onBlur(payload) {
+        console.log('blur');
+        this.setState({ scanned: false });
+    }
+
     render() {
+        <NavigationEvents
+            onWillBlur={payload => this.onBlur(payload).bind(this) }
+            onDidBlur={payload => this.onBlur(payload).bind(this) }
+        />
         if (!this.state.scanned) {
             return (
                 <View style={styles.upperContainer}>

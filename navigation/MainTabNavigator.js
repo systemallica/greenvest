@@ -89,7 +89,7 @@ DashboardStack.navigationOptions = {
       focused={focused}
       name={Platform.OS === "ios" ? "ios-trending-up" : "md-trending-up"}
     />
-  )
+  ),
 };
 
 DashboardStack.path = "";
@@ -102,7 +102,10 @@ const tabNavigator = createBottomTabNavigator(
     DashboardStack
   },
   {
-    initialRouteName: "DiscoverStack"
+    initialRouteName: "DiscoverStack",
+    tabBarOptions: {
+      activeTintColor: "#44AA00",
+    },
   }
 );
 
