@@ -115,7 +115,6 @@ export default function DashboardScreen() {
             width={Dimensions.get("window").width}
             height={220}
             chartConfig={chartConfig}
-            bezier
           />
         </Card>
 
