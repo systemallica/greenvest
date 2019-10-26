@@ -8,8 +8,6 @@ import {
   CardItem,
   Body,
   Text,
-  Right,
-  Left,
   Thumbnail
 } from "native-base";
 import moment from "moment";
@@ -108,7 +106,7 @@ export default function DashboardScreen() {
 
         <Card>
           <Body>
-            <Text>GreenScore over time</Text>
+            <Text>GreenScore per purchase</Text>
           </Body>
           <LineChart
             data={{
