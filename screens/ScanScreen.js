@@ -20,7 +20,7 @@ export default class ScanScreen extends React.Component {
     }
 
     render() {
-        if (!this.state.scanned) {
+        if (this.state.scanned) {
             return (
                 <View style={styles.upperContainer}>
                     <GreenCamera scanCallback={ this.onScanned.bind(this) } />
