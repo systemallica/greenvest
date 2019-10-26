@@ -3,7 +3,7 @@
     "total": 2.56,
     "items": [
         {
-            "category": "fish",
+            "category": "fruits",
             "weight": 0.687,
             "country": "NO",
             "packaging": "plastic"
@@ -15,7 +15,7 @@
             "packaging": "plastic"
         },
         {
-            "category": "fruit",
+            "category": "fruits",
             "weight": 1.04,
             "country": "ES",
             "packaging": "cardboard"
