@@ -185,7 +185,7 @@ export default class ScanDetails extends React.Component {
                         marginTop: '5%',
                         marginBottom: '5%',
                     }}>
-                        Purchase summary
+                        Purchase summary: {this.state.purchase.date}
                     </Text>
                     <Card>
                         <CardItem style={this.styles.cardItem}>

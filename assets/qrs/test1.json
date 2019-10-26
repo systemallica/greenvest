@@ -1,0 +1,24 @@
+{
+    "date": "2019-10-26",
+    "total": 2.56,
+    "items": [
+        {
+            "category": "fruits",
+            "weight": 0.687,
+            "country": "NO",
+            "packaging": "plastic"
+        },
+        {
+            "category": "beef",
+            "weight": 0.891,
+            "country": "BE",
+            "packaging": "plastic"
+        },
+        {
+            "category": "fruits",
+            "weight": 1.04,
+            "country": "ES",
+            "packaging": "cardboard"
+        }
+    ]
+}
