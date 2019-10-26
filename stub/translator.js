@@ -21,7 +21,7 @@ export default translator = {
             weight: 10.9
         },
         {
-            category: "chiken",
+            category: "chicken",
             weight: 6.9
         },
         {
@@ -59,7 +59,8 @@ export default translator = {
         {
             category: "fruits",
             weight: 1.1
-        },        {
+        },
+        {
             category: "lentils",
             weight: 1.1
         }
@@ -90,12 +91,11 @@ export default translator = {
             weight: 0.0
         },
 
-    ]
-    ,country_translation: [
+    ],
+    country_translation: [
         {
             category: "BE",
             weight: 0.0
         },
     ]
-
 };

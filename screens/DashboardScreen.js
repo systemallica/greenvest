@@ -13,18 +13,19 @@ import {
 import moment from "moment";
 
 import purchases from "../stub/purchases";
+import * as colors from '../constants/Colors';
 
 export default function DashboardScreen() {
   const chartConfig = {
-    backgroundColor: "#e26a00",
-    backgroundGradientFrom: "#fb8c00",
-    backgroundGradientTo: "#ffa726",
-    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    backgroundColor: "white",
+    backgroundGradientFrom: "white",
+    backgroundGradientTo: "white",
+    color: (opacity = 1) => `rgba(120, 188, 97, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     propsForDots: {
       r: "6",
       strokeWidth: "2",
-      stroke: "#ffa726"
+      stroke: "#78BC61"
     }
   };
 
@@ -39,25 +40,30 @@ export default function DashboardScreen() {
     return results;
   });
 
+  aggregatedPurchase.greenScore /= purchases.length;
+  aggregatedPurchase.greenScore = aggregatedPurchase.greenScore.toFixed(2);
+  aggregatedPurchase.amount = aggregatedPurchase.amount.toFixed(2);
+  aggregatedPurchase.telenetScore = aggregatedPurchase.telenetScore.toFixed(2);
+
   const purchaseCategoriesParsedForPiechart = [
     {
-      name: "< 2kg",
+      name: "< 3.5kg",
       value: aggregatedPurchase.categories.green,
-      color: "green",
+      color: '#44AA00',
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     },
     {
-      name: " 2kg - 7kg",
+      name: " 3.5kg - 7kg",
       value: aggregatedPurchase.categories.yellow,
-      color: "yellow",
+      color: '#E5E059',
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     },
     {
       name: "> 7kg",
       value: aggregatedPurchase.categories.red,
-      color: "red",
+      color: "#BB4430",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     }
@@ -83,22 +89,23 @@ export default function DashboardScreen() {
         <Card>
           <CardItem style={this.styles.cardItem}>
             <View style={this.styles.cardItemBadge}>
-              <Thumbnail square source={require("../assets/images/icon.png")} />
+              <Thumbnail large square source={require("../assets/images/icon.png")} />
               <Text style={{ marginTop: 5 }}>
-                {aggregatedPurchase.greenScore}
+                {aggregatedPurchase.greenScore}%
               </Text>
             </View>
             <View style={this.styles.cardItemBadge}>
-              <Thumbnail square source={require("../assets/images/euro.png")} />
-              <Text style={{ marginTop: 5 }}>{aggregatedPurchase.amount}</Text>
+              <Thumbnail large square source={require("../assets/images/euro.png")} />
+              <Text style={{ marginTop: 5 }}>{aggregatedPurchase.amount}€</Text>
             </View>
             <View style={this.styles.cardItemBadge}>
               <Thumbnail
+                large
                 square
-                source={require("../assets/images/telenet.png")}
+                source={require("../assets/images/eco-points.png")}
               />
               <Text style={{ marginTop: 5 }}>
-                {aggregatedPurchase.telenetScore}
+                {aggregatedPurchase.telenetScore} ecoins
               </Text>
             </View>
           </CardItem>

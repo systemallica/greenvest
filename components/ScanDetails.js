@@ -17,6 +17,8 @@ import {
     Icon,
 } from 'native-base';
 
+import { GREEN, YELLOW, RED } from '../constants/Colors';
+
 import { PieChart } from "react-native-chart-kit";
 
 export default class ScanDetails extends React.Component {
@@ -111,24 +113,24 @@ export default class ScanDetails extends React.Component {
         if (details !== undefined) {
             const pieChartData = [
                 {
-                    name: "  < 2kg",
+                    name: "  < 3.5kg",
                     amount: details.categories.green,
-                    color: '#00FF00',
-                    legendFontColor: "#000000",
+                    color: '#44AA00',
+                    legendFontColor: "#7F7F7F",
                     legendFontSize: 15
                 },
                 {
-                    name: "  2 - 7 kg",
+                    name: "  3.5 - 7 kg",
                     amount: details.categories.yellow,
-                    color: '#FFFF00',
-                    legendFontColor: "#000000",
+                    color: '#E5E059',
+                    legendFontColor: "#7F7F7F",
                     legendFontSize: 15
                 },
                 {
                     name: "  > 7kg",
                     amount: details.categories.red,
-                    color: '#FF0000',
-                    legendFontColor: "#000000",
+                    color: '#BB4430',
+                    legendFontColor: "#7F7F7F",
                     legendFontSize: 15
                 },
     
@@ -183,7 +185,7 @@ export default class ScanDetails extends React.Component {
                         marginTop: '5%',
                         marginBottom: '5%',
                     }}>
-                        Purchase summary
+                        Purchase summary: {this.state.purchase.date}
                     </Text>
                     <Card>
                         <CardItem style={this.styles.cardItem}>
@@ -199,9 +201,9 @@ export default class ScanDetails extends React.Component {
                                 <Thumbnail
                                     square
                                     large
-                                    source={require("../assets/images/telenet.png")}
+                                    source={require("../assets/images/eco-points.png")}
                                 />
-                                <Text style={{ marginTop: 5 }}>{this.state.details.telenetScore}</Text>
+                                <Text style={{ marginTop: 5 }}>{this.state.details.telenetScore} ecoins</Text>
                             </View>
                         </CardItem>
                         <CardItem style={{display: 'flex', justifyContent: 'center'}}>
