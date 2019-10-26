@@ -12,10 +12,9 @@ import {
   Right
 } from "native-base";
 
-import discounts from "../stub/discounts"
+import discounts from "../stub/discounts";
 
 export default function DiscoverScreen() {
-
   return (
     <Container style={styles.container}>
       <Content>
