@@ -56,7 +56,7 @@ export default function DiscoverScreen() {
 }
 
 DiscoverScreen.navigationOptions = {
-  title: "Discover"
+  title: "Discover discounts"
 };
 
 const styles = StyleSheet.create({

@@ -46,5 +46,5 @@ const styles = StyleSheet.create({
 });
 
 App.navigationOptions = {
-  title: "Home"
+  title: "Eco shops nearby"
 };
