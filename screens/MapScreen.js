@@ -2,43 +2,9 @@ import React from "react";
 import MapView from "react-native-maps";
 import { StyleSheet, View, Dimensions } from "react-native";
 import { Marker } from "react-native-maps";
+import shops from "../stub/shops";
 
 export default class App extends React.Component {
-  state = {
-    markers: [
-      {
-        latlng: {
-          latitude: 50.8503396,
-          longitude: 4.3517103
-        },
-        description: "Fresh vegetables and fruits",
-        title: "Joe's shop",
-        color: "yellow",
-        score: "50"
-      },
-      {
-        latlng: {
-          latitude: 50.8603396,
-          longitude: 4.3517103
-        },
-        description: "All kind of bio products",
-        title: "Bio greens",
-        color: "green",
-        score: "89"
-      },
-      {
-        latlng: {
-          latitude: 50.8603396,
-          longitude: 4.3617103
-        },
-        description: "Multinational supermarket",
-        title: "Carrefour",
-        color: "red",
-        score: "30"
-      }
-    ]
-  };
-
   render() {
     return (
       <View style={styles.container}>
@@ -51,13 +17,13 @@ export default class App extends React.Component {
           }}
           style={styles.mapStyle}
         >
-          {this.state.markers.map((marker, i) => (
+          {shops.map((shop, i) => (
             <Marker
               key={i}
-              coordinate={marker.latlng}
-              title={`${marker.title} ${marker.score}%`}
-              description={marker.description}
-              pinColor={marker.color}
+              coordinate={shop.latlng}
+              title={`${shop.title} ${shop.score}%`}
+              description={shop.description}
+              pinColor={shop.color}
             />
           ))}
         </MapView>

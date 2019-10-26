@@ -9,13 +9,13 @@ import {
   Text,
   Left,
   Body,
-  Right
+  Right,
+  View
 } from "native-base";
 
-import discounts from "../stub/discounts"
+import discounts from "../stub/discounts";
 
 export default function DiscoverScreen() {
-
   return (
     <Container style={styles.container}>
       <Content>
@@ -36,8 +36,16 @@ export default function DiscoverScreen() {
                 <Text note>{discount.description}</Text>
               </Body>
               <Right>
-                <Text>{`${discount.old_price}€ -> ${discount.new_price}€`}</Text>
-                <Text>{discount.distance}</Text>
+                <View style={{ display: "flex", flexDirection: "row" }}>
+                  <Text
+                    style={{ color: "red", textDecorationLine: "line-through" }}
+                  >{`${discount.old_price}€ `}</Text>
+                  <Text> -> </Text>
+                  <Text
+                    style={{ color: "green" }}
+                  >{`${discount.new_price}€`}</Text>
+                </View>
+                <Text>{discount.distance} away</Text>
               </Right>
             </ListItem>
           ))}
