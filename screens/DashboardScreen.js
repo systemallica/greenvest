@@ -65,13 +65,19 @@ export default function DashboardScreen() {
     }
   ];
 
-  const purchaseGreenScores = [];
-  const purchaseDates = [];
+  let purchaseGreenScores = [];
+  let purchaseDates = [];
 
   for (purchase of purchases) {
     purchaseGreenScores.push(purchase.greenScore);
     purchaseDates.push(moment(purchase.date).format("DD/MM"));
   }
+
+  // Only take last four elements
+  purchaseGreenScores = purchaseGreenScores.slice(
+    purchaseGreenScores.length - 4
+  );
+  purchaseDates = purchaseDates.slice(purchaseDates.length - 4);
 
   return (
     <Container>
