@@ -45,7 +45,9 @@ export default class ScanDetails extends React.Component {
             // Products from abroad are supposed to have gone from Panama to Belgium (8808 km) which translates to 0.89 Kg of carbon footprint per product. 
             footprint_normalizer = Math.max.apply(Math, translator.category_translation.map(function(o) { return o.weight; }));
             // Packaging supposed to be 5 per cent
+            console.log("normalizer 1 ",footprint_normalizer);
             footprint_normalizer += 0.05*Math.max.apply(Math, translator.packaging_translation.map(function(o) { return o.weight; }));
+            console.log("normalizer 2 ",footprint_normalizer);
             footprint_normalizer += 0.89;
             console.log("normalizer ",footprint_normalizer);
             scores =[];
@@ -60,7 +62,7 @@ export default class ScanDetails extends React.Component {
                     ct_fp_w = 0.89;
                 }
                 pkg_fp_w = translator.packaging_translation.find(categ => categ.category == item["packaging"]).weight;
-                item_score = (prod_fp_w + ct_fp_w + pkg_fp_w*0.05 )/(footprint_normalizer);
+                item_score = (prod_fp_w + ct_fp_w + pkg_fp_w*0.05 );
                 console.log("item score ",item_score);
                 total_score += item.weight*(prod_fp_w + ct_fp_w + pkg_fp_w*0.05 )/(purchase_weight*footprint_normalizer);
                 console.log("total score ",total_score);
@@ -79,7 +81,7 @@ export default class ScanDetails extends React.Component {
             let red_amount = 0;
 
             scores.forEach(item => {
-                if (item.score < 2.0) {
+                if (item.score < 3.5) {
                     green_amount++;
                 } else if (item.score < 7.0) {
                     yellow_amount++;

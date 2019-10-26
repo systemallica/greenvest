@@ -85,6 +85,11 @@ export default translator = {
             category: "glass",
             weight: 6.0
         },
+        {
+            category: "none",
+            weight: 0.0
+        },
+
     ]
     ,country_translation: [
         {
