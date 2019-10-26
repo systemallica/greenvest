@@ -12,6 +12,7 @@ import {
   Right,
   View
 } from "native-base";
+import { Linking } from "expo";
 
 import discounts from "../stub/discounts";
 
@@ -21,7 +22,16 @@ export default function DiscoverScreen() {
       <Content>
         <List>
           {discounts.map((discount, i) => (
-            <ListItem thumbnail key={i}>
+            <ListItem
+              button
+              onPress={() =>
+                Linking.openURL(
+                  `https://www.google.com/search?q=${discount.shop}`
+                )
+              }
+              thumbnail
+              key={i}
+            >
               <Left>
                 <Thumbnail
                   circle
@@ -62,7 +72,6 @@ DiscoverScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: "#fff"
   }
 });
