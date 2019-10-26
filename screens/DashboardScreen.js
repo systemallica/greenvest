@@ -1,7 +1,18 @@
 import React from "react";
-import { Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import { LineChart, PieChart } from "react-native-chart-kit";
-import { Text, Body, Container } from "native-base";
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Body,
+  Text,
+  Right,
+  Left,
+  Thumbnail
+} from "native-base";
+
 import purchases from "../stub/purchases";
 
 export default function DashboardScreen() {
@@ -11,9 +22,6 @@ export default function DashboardScreen() {
     backgroundGradientTo: "#ffa726",
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-    style: {
-      borderRadius: 16
-    },
     propsForDots: {
       r: "6",
       strokeWidth: "2",
@@ -21,10 +29,13 @@ export default function DashboardScreen() {
     }
   };
 
-  const aggregatedPurchaseCategories = purchases.reduce((results, purchase) => {
+  const aggregatedPurchase = purchases.reduce((results, purchase) => {
     results.categories.green += purchase.categories.green;
     results.categories.red += purchase.categories.red;
     results.categories.yellow += purchase.categories.yellow;
+    results.greenScore += purchase.greenScore;
+    results.telenetScore += purchase.telenetScore;
+    results.amount += purchase.amount;
 
     return results;
   });
@@ -32,21 +43,21 @@ export default function DashboardScreen() {
   const purchaseCategoriesParsedForPiechart = [
     {
       name: "Green",
-      value: aggregatedPurchaseCategories.categories.green,
+      value: aggregatedPurchase.categories.green,
       color: "green",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     },
     {
       name: "Red",
-      value: aggregatedPurchaseCategories.categories.red,
+      value: aggregatedPurchase.categories.red,
       color: "red",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
     },
     {
       name: "Yellow",
-      value: aggregatedPurchaseCategories.categories.yellow,
+      value: aggregatedPurchase.categories.yellow,
       color: "yellow",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15
@@ -55,53 +66,64 @@ export default function DashboardScreen() {
 
   return (
     <Container>
-      <View>
-        <Body>
-          <Text>Bezier Line Chart</Text>
-        </Body>
-        <LineChart
-          data={{
-            labels: ["January", "February", "March", "April", "May", "June"],
-            datasets: [
-              {
-                data: [
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100
-                ]
-              }
-            ]
-          }}
-          width={Dimensions.get("window").width}
-          height={220}
-          yAxisLabel={"$"}
-          chartConfig={chartConfig}
-          bezier
-          style={{
-            marginVertical: 24,
-            borderRadius: 16
-          }}
-        />
-      </View>
+      <Content>
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail square source={require("../assets/images/icon.png")} />
+              <Text>{aggregatedPurchase.greenScore}</Text>
+            </Left>
+            <Body>
+              <Thumbnail square source={require("../assets/images/euro.png")} />
+              <Text>{aggregatedPurchase.amount}</Text>
+            </Body>
+            <Right>
+              <Thumbnail
+                square
+                source={require("../assets/images/telenet.png")}
+              />
+              <Text>{aggregatedPurchase.telenetScore}</Text>
+            </Right>
+          </CardItem>
+        </Card>
 
-      <View>
-        <Body>
-          <Text>Pie Chart</Text>
-        </Body>
-        <PieChart
-          data={purchaseCategoriesParsedForPiechart}
-          width={Dimensions.get("window").width}
-          height={220}
-          chartConfig={chartConfig}
-          accessor="value"
-          backgroundColor="transparent"
-          paddingLeft="15"
-          absolute
-        />
-      </View>
+        <Card>
+          <LineChart
+            data={{
+              labels: ["January", "February", "March", "April", "May", "June"],
+              datasets: [
+                {
+                  data: [
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100,
+                    Math.random() * 100
+                  ]
+                }
+              ]
+            }}
+            width={Dimensions.get("window").width}
+            height={220}
+            yAxisLabel={"$"}
+            chartConfig={chartConfig}
+            bezier
+          />
+        </Card>
+
+        <Card>
+          <PieChart
+            data={purchaseCategoriesParsedForPiechart}
+            width={Dimensions.get("window").width}
+            height={220}
+            chartConfig={chartConfig}
+            accessor="value"
+            backgroundColor="transparent"
+            absolute
+          />
+        </Card>
+      </Content>
     </Container>
   );
 }
